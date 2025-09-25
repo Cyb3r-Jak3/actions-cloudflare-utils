@@ -1,110 +1,42 @@
-<p align="center">
-  <a href="https://github.com/actions/typescript-action/actions"><img alt="typescript-action status" src="https://github.com/actions/typescript-action/workflows/build-test/badge.svg"></a>
-</p>
+# Cloudflare Utils Action
 
-# Create a JavaScript Action using TypeScript
+This repository contains a GitHub Action that installs [cloudflare-utils](https://github.com/Cyb3r-Jak3/cloudflare-utils) and provides a set of utility functions for working with Cloudflare's API.
 
-Use this template to bootstrap the creation of a TypeScript action.:rocket:
+## Using the Action
 
-This template includes compilation support, tests, a validation workflow, publishing, and versioning guidance.  
-
-If you are new, there's also a simpler introduction.  See the [Hello World JavaScript Action](https://github.com/actions/hello-world-javascript-action)
-
-## Create an action from this template
-
-Click the `Use this Template` and provide the new repo details for your action
-
-## Code in Main
-
-> First, you'll need to have a reasonably modern version of `node` handy. This won't work with versions older than 9, for instance.
-
-Install the dependencies  
-```bash
-$ npm install
-```
-
-Build the typescript and package it for distribution
-```bash
-$ npm run build && npm run package
-```
-
-Run the tests :heavy_check_mark:  
-```bash
-$ npm test
-
- PASS  ./index.test.js
-  ✓ throws invalid number (3ms)
-  ✓ wait 500 ms (504ms)
-  ✓ test runs (95ms)
-
-...
-```
-
-## Change action.yml
-
-The action.yml defines the inputs and output for your action.
-
-Update the action.yml with your name, description, inputs and outputs for your action.
-
-See the [documentation](https://help.github.com/en/articles/metadata-syntax-for-github-actions)
-
-## Change the Code
-
-Most toolkit and CI/CD operations involve async operations so the action is run in an async function.
-
-```javascript
-import * as core from '@actions/core';
-...
-
-async function run() {
-  try { 
-      ...
-  } 
-  catch (error) {
-    core.setFailed(error.message);
-  }
-}
-
-run()
-```
-
-See the [toolkit documentation](https://github.com/actions/toolkit/blob/master/README.md#packages) for the various packages.
-
-## Publish to a distribution branch
-
-Actions are run from GitHub repos so we will checkin the packed dist folder. 
-
-Then run [ncc](https://github.com/zeit/ncc) and push the results:
-```bash
-$ npm run package
-$ git add dist
-$ git commit -a -m "prod dependencies"
-$ git push origin releases/v1
-```
-
-Note: We recommend using the `--license` option for ncc, which will create a license file for all of the production node modules used in your project.
-
-Your action is now published! :rocket: 
-
-See the [versioning documentation](https://github.com/actions/toolkit/blob/master/docs/action-versioning.md)
-
-## Validate
-
-You can now validate the action by referencing `./` in a workflow in your repo (see [test.yml](.github/workflows/test.yml))
+To use this action in your GitHub workflow, add the following step to your workflow file:
 
 ```yaml
-uses: ./
-with:
-  milliseconds: 1000
+- name: Cloudflare Utils Action
+  uses: Cyb3r-Jak3/cloudflare-utils-action@v1
+  with:
+    version: 'latest' # or specify a version like '1.2.3'
 ```
 
-See the [actions tab](https://github.com/actions/typescript-action/actions) for runs of this action! :rocket:
+and `cloudflare-utils` will be installed and available for use in subsequent steps.
+You can then use the installed `cloudflare-utils` commands in your workflow steps.
 
-## Usage:
+If you want to run a specific command, you can do so like this:
 
-After testing you can [create a v1 tag](https://github.com/actions/toolkit/blob/master/docs/action-versioning.md) to reference the stable and latest V1 action
+```yaml
+- name: Run Cloudflare Utils Command
+  run: cloudflare-utils <command> [options]
+```
 
-# ToDo
+you can also pass the command as an input to the action:
 
-1. Replace the downloading to use tags instead of external links
-2. 
+```yaml
+- name: Cloudflare Utils Action with Command
+  uses: Cyb3r-Jak3/cloudflare-utils-action@v1
+  with:
+    version: 'latest' # or specify a version like '1.2.3'
+    command: 'your-command-here'
+  env:
+    CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+```
+
+## Inputs
+
+- `version`: The version of `cloudflare-utils` to install. Default is `latest`
+- `github_token`: GitHub token for authentication. Default is `${{ github.token }}`
+- `command`: (Optional) The specific command to run after installation. If not provided the action will just install cloudflare-utils.
