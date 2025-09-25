@@ -1,0 +1,19 @@
+name: 'cloudflare-utils'
+description: 'Install cloudflare-utils'
+author: 'Cyb3r-Jak3'
+inputs:
+  version:
+    required: false
+    description: 'Version of cloudflare-utils to install'
+    default: 'latest'
+  github_token:
+    required: false
+    description: 'GitHub token used to use the GitHub API to get the release. By default, it uses the GITHUB_TOKEN secret.'
+    default: ${{ github.token }}
+  command:
+    required: false
+    description: 'Command to run with cloudflare-utils. If not provided, the action will only install cloudflare-utils.'
+    default: ''
+runs:
+  using: 'node24'
+  main: 'dist/index.js'

@@ -1,0 +1,55 @@
+name: 'build-test'
+on: # rebuild any PRs and main branch changes
+  pull_request:
+  push:
+    branches:
+      - main
+      - 'releases/*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+
+      - uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4.1.0
+        name: Install pnpm
+        with:
+          version: 10
+          run_install: false
+
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
+        with:
+          node-version: '24'
+          cache: 'pnpm'
+
+      - run: |
+          pnpm install
+      - run: |
+          pnpm run all
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install latest version with token
+        uses: ./
+        with:
+          version: 'latest'
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          command: '--version'
+      - name: Install specific version with token
+        uses: ./
+        with:
+          version: '1.4.4'
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          command: '--version'
+      - name: Install latest version without setting token
+        uses: ./
+        with:
+          version: 'latest'
+      - name: Install specific version without setting token
+        uses: ./
+        with:
+          version: '1.4.4'
+          command: '--version'
