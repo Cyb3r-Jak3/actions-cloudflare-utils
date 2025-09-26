@@ -8,6 +8,15 @@ import {osPlat, osArch, Inputs} from './context'
 
 export async function install(inputs: Inputs): Promise<string> {
   const release: github.GitHubRelease = await github.getRelease(inputs)
+  const release_tag = release.tag_name.replace(/^v/, '')
+  const cacheDir = tc.find('cloudflare-utils', release_tag)
+  if (cacheDir !== '') {
+    core.debug('Found in tools cache')
+    return path.join(
+      cacheDir,
+      osPlat == 'win32' ? 'cloudflare-utils.exe' : 'cloudflare-utils'
+    )
+  }
   const filename = getFilename(release.tag_name)
   const downloadUrl = util.format(
     'https://github.com/Cyb3r-Jak3/cloudflare-utils/releases/download/%s/%s',
@@ -16,7 +25,7 @@ export async function install(inputs: Inputs): Promise<string> {
   )
 
   core.info(`Downloading ${downloadUrl}`)
-  const downloadPath: string = await tc.downloadTool(downloadUrl)
+  const downloadPath = await tc.downloadTool(downloadUrl)
   core.debug(`Downloaded to ${downloadPath}`)
 
   core.info('Extracting Cloudflare Utils')
@@ -37,7 +46,7 @@ export async function install(inputs: Inputs): Promise<string> {
   const cachePath: string = await tc.cacheDir(
     extPath,
     'cloudflare-utils',
-    release.tag_name.replace(/^v/, '')
+    release_tag
   )
   core.debug(`Cached to ${cachePath}`)
 
