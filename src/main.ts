@@ -2,6 +2,7 @@ import * as core from '@actions/core'
 import {getInputs} from './context'
 import {install} from './download'
 import * as exec from '@actions/exec'
+import * as path from 'path'
 
 async function run(): Promise<void> {
   try {
@@ -9,6 +10,8 @@ async function run(): Promise<void> {
 
     core.info(`cloudflare-utils Version: ${context.version}`)
     const bin = await install(context)
+
+    core.addPath(path.dirname(bin))
 
     if (context.args) {
       const full_command = `cloudflare-utils ${context.args}`
