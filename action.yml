@@ -10,9 +10,9 @@ inputs:
     required: false
     description: 'GitHub token used to use the GitHub API to get the release. By default, it uses the GITHUB_TOKEN secret.'
     default: ${{ github.token }}
-  command:
+  args:
     required: false
-    description: 'Command to run with cloudflare-utils. If not provided, the action will only install cloudflare-utils.'
+    description: 'Args to run with cloudflare-utils. If not provided, the action will only install cloudflare-utils.'
     default: ''
 runs:
   using: 'node24'

@@ -10,10 +10,10 @@ async function run(): Promise<void> {
     core.info(`cloudflare-utils Version: ${context.version}`)
     const bin = await install(context)
 
-    if (context.command) {
-      const full_command = `cloudflare-utils ${context.command}`
+    if (context.args) {
+      const full_command = `cloudflare-utils ${context.args}`
       core.info(`Running command: ${full_command}`)
-      await exec.exec(bin, [context.command])
+      await exec.exec(bin, context.args.split(' '))
     } else {
       core.info('Installation complete.')
     }

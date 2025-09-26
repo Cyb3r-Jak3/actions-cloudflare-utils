@@ -8,7 +8,7 @@ export const osArch: string = os.arch()
 export interface Inputs {
   version: string
   github_client: ReturnType<typeof github.getOctokit>
-  command?: string
+  args: string
 }
 
 export async function getInputs(): Promise<Inputs> {
@@ -17,11 +17,11 @@ export async function getInputs(): Promise<Inputs> {
   if (version && !/^v/.test(version) && version !== 'latest') {
     version = 'v' + version
   }
-  const command = core.getInput('command')
+  const args = core.getInput('args')
 
   return {
     version: version,
     github_client: github.getOctokit(githubToken),
-    command: command
+    args: args
   }
 }
