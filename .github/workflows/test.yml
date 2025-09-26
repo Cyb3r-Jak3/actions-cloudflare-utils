@@ -37,13 +37,13 @@ jobs:
         with:
           version: 'latest'
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          command: '--version'
+          args: '--version'
       - name: Install specific version with token
         uses: ./
         with:
           version: '1.4.4'
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          command: '--version'
+          args: '--version'
       - name: Install latest version without setting token
         uses: ./
         with:
@@ -52,4 +52,4 @@ jobs:
         uses: ./
         with:
           version: '1.4.4'
-          command: '--version'
+          args: '--version'
