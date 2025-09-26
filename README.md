@@ -8,7 +8,7 @@ To use this action in your GitHub workflow, add the following step to your workf
 
 ```yaml
 - name: Cloudflare Utils Action
-  uses: Cyb3r-Jak3/cloudflare-utils-action@v1
+  uses: Cyb3r-Jak3/actions-cloudflare-utils@v1
   with:
     version: 'latest' # or specify a version like '1.2.3'
 ```
@@ -23,14 +23,14 @@ If you want to run a specific command, you can do so like this:
   run: cloudflare-utils <command> [options]
 ```
 
-you can also pass the command as an input to the action:
+you can also pass the command directly to the action like this:
 
 ```yaml
 - name: Cloudflare Utils Action with Command
-  uses: Cyb3r-Jak3/cloudflare-utils-action@v1
+  uses: Cyb3r-Jak3/actions-cloudflare-utils@v1
   with:
     version: 'latest' # or specify a version like '1.2.3'
-    command: 'your-command-here'
+    args: 'your-command-here'
   env:
     CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
 ```

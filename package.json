@@ -1,6 +1,6 @@
 {
   "name": "cloudflare-utils-action",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "GitHub Action for Cloudflare utils",
   "main": "src/main.ts",
   "scripts": {
