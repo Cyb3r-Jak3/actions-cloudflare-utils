@@ -40,3 +40,7 @@ you can also pass the command directly to the action like this:
 - `version`: The version of `cloudflare-utils` to install. Default is `latest`
 - `github_token`: GitHub token for authentication. Default is `${{ github.token }}`
 - `command`: (Optional) The specific command to run after installation. If not provided the action will just install cloudflare-utils.
+
+## Examples
+
+I have a [repository](https://github.com/Cyb3r-Jak3/cloudflare-util-github-syncer) that uses this actions to sync GitHub IPs to Cloudflare firewall rules.
