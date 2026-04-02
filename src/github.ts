@@ -1,5 +1,5 @@
 import * as semver from 'semver'
-import {Inputs} from './context'
+import {Inputs} from './context.js'
 
 export interface GitHubRelease {
   tag_name: string

@@ -1,6 +1,6 @@
 import * as core from '@actions/core'
-import {getInputs} from './context'
-import {install} from './download'
+import {getInputs} from './context.js'
+import {install} from './download.js'
 import * as exec from '@actions/exec'
 import * as path from 'path'
 

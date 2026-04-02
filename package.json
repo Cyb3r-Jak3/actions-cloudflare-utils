@@ -2,6 +2,7 @@
   "name": "cloudflare-utils-action",
   "version": "1.0.1",
   "description": "GitHub Action for Cloudflare utils",
+  "type": "module",
   "main": "src/main.ts",
   "scripts": {
     "package": "ncc build src/main.ts --source-map --minify --license licenses.txt",
