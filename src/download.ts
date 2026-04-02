@@ -1,10 +1,10 @@
 import * as fs from 'fs'
 import * as path from 'path'
 import * as util from 'util'
-import * as github from './github'
+import * as github from './github.js'
 import * as core from '@actions/core'
 import * as tc from '@actions/tool-cache'
-import {osPlat, osArch, Inputs} from './context'
+import {osPlat, osArch, Inputs} from './context.js'
 
 export async function install(inputs: Inputs): Promise<string> {
   const release: github.GitHubRelease = await github.getRelease(inputs)

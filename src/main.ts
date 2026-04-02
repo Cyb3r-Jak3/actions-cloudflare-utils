@@ -1,6 +1,7 @@
 import * as core from '@actions/core'
-import {getInputs} from './context'
-import {install} from './download'
+import {getInputs} from './context.js'
+import {install} from './download.js'
+import * as exec from '@actions/exec'
 import * as path from 'path'
 
 async function run(): Promise<void> {
@@ -13,7 +14,6 @@ async function run(): Promise<void> {
     core.addPath(path.dirname(bin))
 
     if (context.args) {
-      const exec = await import('@actions/exec')
       const full_command = `cloudflare-utils ${context.args}`
       core.info(`Running command: ${full_command}`)
       await exec.exec(bin, context.args.split(' '))
