@@ -9,6 +9,7 @@ export const osArch: string = os.arch()
 export interface Inputs {
   version: string
   github_client: ReturnType<typeof github.getOctokit>
+  skip_token_check: string
   args: string
 }
 
@@ -26,10 +27,12 @@ export async function getInputs(): Promise<Inputs> {
     version = 'v' + version
   }
   const args = core.getInput('args')
+  const skip_token_check = core.getInput('skip_token_check')
 
   return {
     version: version,
     github_client: github.getOctokit(githubToken),
-    args: args
+    args: args,
+    skip_token_check: skip_token_check
   }
 }
