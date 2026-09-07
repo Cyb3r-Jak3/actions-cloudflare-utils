@@ -43,6 +43,7 @@ jobs:
           version: '1.8.0'
           github_token: ${{ secrets.GITHUB_TOKEN }}
           args: '--version'
+          skip_token_check: 'false'
 
       - name: Install latest version without setting token
         uses: ./
@@ -52,7 +53,7 @@ jobs:
       - name: Install specific version without setting token
         uses: ./
         with:
-          version: '1.8.0'
+          version: '1.9.0'
           args: '--version'
 
       - name: Install without setting args
@@ -64,5 +65,5 @@ jobs:
       - name: Install of semver range
         uses: ./
         with:
-          version: '>=1.8.0,<2'
+          version: '>=1.9.0,<2'
           github_token: ${{ secrets.GITHUB_TOKEN }}
