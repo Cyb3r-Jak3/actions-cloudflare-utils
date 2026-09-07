@@ -14,6 +14,10 @@ inputs:
     required: false
     description: 'Args to run with cloudflare-utils. If not provided, the action will only install cloudflare-utils.'
     default: ''
+  skip_token_check:
+    required: false
+    description: 'Skip permission check for the Cloudflare API token. If set to true, the action will not check if the token has the necessary permissions to access the Cloudflare API.'
+    default: 'true'
 runs:
   using: 'node24'
   main: 'dist/index.js'
